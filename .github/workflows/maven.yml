@@ -32,6 +32,7 @@ jobs:
       - name: Run Selenium tests
         run: mvn clean test
 
+  # Build and publish Docker image only after tests pass
   build-and-publish-docker:
     needs: selenium-test
     runs-on: ubuntu-latest
@@ -57,5 +58,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/dev6:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/dev6:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/selenium-testng-automation:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/selenium-testng-automation:${{ github.sha }}
